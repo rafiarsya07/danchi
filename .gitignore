@@ -48,3 +48,5 @@ next-env.d.ts
 /deploy/*.tgz
 
 /deploy/*.tgz
+
+/deploy/*.tgz
