@@ -1,0 +1,1 @@
+ALTER TABLE "settings" ADD COLUMN "sos_camera" boolean DEFAULT false NOT NULL;

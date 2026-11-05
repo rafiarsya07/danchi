@@ -1,0 +1,32 @@
+==unit
+User=user
+ExecStart=/usr/local/bin/cloudflared tunnel --config /home/user/.cloudflared/config.yml run
+==proc
+user     /usr/local/bin/cloudflared tunnel --config /home/user/.cloudflared/config.yml run
+65532    cloudflared --no-autoupdate tunnel --no-autoupdate run
+65532    cloudflared tunnel --no-autoupdate --protocol http2 run
+65532    cloudflared --no-autoupdate tunnel --no-autoupdate --protocol http2 run
+==dns
+2606:4700:3032::6815:1923 tanahraya.rafiarsya.com
+==tunnels
+You can obtain more detailed information for each tunnel with `cloudflared tunnel info <name/uuid>`
+ID                                   NAME          CREATED              CONNECTIONS                        
+07e70c29-9f2e-43cd-881b-2e7d88298063 campusbay     2026-06-05T19:28:53Z 2xhkg09, 1xhkg10, 1xhkg11          
+60fe2ce1-aee2-4e19-a1a9-ca1c210e4402 db-tunnel     2026-05-26T06:31:09Z                                    
+bcdee282-74fb-42d6-afd3-b1136cfdb0ab marketplace   2026-06-02T11:11:15Z                                    
+30fd8748-a6d0-4550-8f4c-53a1b4127d16 my-tunnel     2026-05-26T06:22:06Z                                    
+efaaae90-d6b6-4d76-bce1-b44a4caeef86 rafifinance   2026-10-10T06:40:47Z 2xhkg09, 2xhkg11                   
+74f829e8-8004-4766-80fb-bb6e2359b3e8 umove-api     2026-09-30T02:34:45Z 1xhkg01, 1xhkg08, 1xhkg09, 1xhkg10 
+4835362c-3644-4905-a01d-b990d9e7b3b5 umove-staging 2026-10-23T10:34:41Z 1xhkg01, 1xhkg09, 1xhkg11, 1xhkg13 
+2026-11-02T23:10:54Z WRN Your version 2026.5.1 is outdated. We recommend upgrading it to 2026.10.7
+==freeports
+3110 free
+3120 free
+3130 free
+3140 free
+==tanah
+HTTP/1.1 200 OK
+==pg
+sudo: a password is required
+18-main.pid
+exit 0 

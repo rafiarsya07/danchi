@@ -1,0 +1,335 @@
+@import "tailwindcss";
+@import "@fontsource-variable/fredoka";
+@import "@fontsource-variable/nunito";
+
+@theme {
+  --font-sans: "Nunito Variable", system-ui, sans-serif;
+  --font-display: "Fredoka Variable", "Nunito Variable", sans-serif;
+  /* calmer type: "extrabold" reads as bold, "black" as extrabold */
+  --font-weight-extrabold: 700;
+  --font-weight-black: 800;
+
+  --color-ink: #2e2240;
+  --color-ink-soft: #6a5e7c;
+  --color-cream: #fbf8f6;
+  --color-peach: #ffc4a3;
+  --color-peach-soft: #fff3eb;
+  --color-sun: #ffe08a;
+  --color-sun-soft: #fff8e1;
+  --color-mint: #b3e9d1;
+  --color-mint-soft: #edf9f3;
+  --color-sky: #b9dcff;
+  --color-sky-soft: #eef6ff;
+  --color-lilac: #d8cbff;
+  --color-lilac-soft: #f5f1ff;
+  --color-pink: #ffbfd5;
+  --color-pink-soft: #fff0f5;
+  --color-coral: #f0645a;
+  --color-leaf: #2eb67d;
+  --color-grape: #7c5cff;
+  --color-line: rgb(46 34 64 / 0.1);
+  --color-line-strong: rgb(46 34 64 / 0.18);
+  --color-bubble: #ffe6d6;
+  --color-quote: #f5f1ff;
+}
+
+/* Moon mode: same layout, deep night colours. */
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --color-ink: #f5eeff;
+  --color-ink-soft: #b9adcf;
+  --color-cream: #15121b;
+  --color-white: #211c2a;
+  --color-peach: #8a4f38;
+  --color-peach-soft: #2a2124;
+  --color-sun: #7d6420;
+  --color-sun-soft: #2c2720;
+  --color-mint: #2a6b53;
+  --color-mint-soft: #1a2b26;
+  --color-sky: #2b5378;
+  --color-sky-soft: #1a2430;
+  --color-lilac: #54458f;
+  --color-lilac-soft: #241f36;
+  --color-pink: #8a3d5c;
+  --color-pink-soft: #2c1f29;
+  --color-coral: #d0544a;
+  --color-grape: #b39cff;
+  --color-line: rgb(245 238 255 / 0.1);
+  --color-line-strong: rgb(245 238 255 / 0.18);
+  --color-bubble: #4a3030;
+  --color-quote: #2b2443;
+}
+/* The island and little "ink" chips stay black with light text at night */
+html[data-theme="dark"] .bg-ink {
+  background-color: #0b0910;
+  --color-cream: #f5eeff;
+  color: #f5eeff;
+}
+html[data-theme="dark"] .field::placeholder {
+  color: #9b90b0;
+}
+html[data-theme="dark"] img {
+  filter: brightness(0.95);
+}
+
+/* One soft glow at the top, the rest calm */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(70vmax 30vmax at 50% -6%, color-mix(in srgb, var(--color-peach) 22%, transparent), transparent 70%),
+    var(--color-cream);
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-weight: 600;
+  }
+  input,
+  select,
+  textarea,
+  button {
+    font: inherit;
+    color: inherit;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-grape);
+    outline-offset: 2px;
+  }
+}
+
+@utility sticker {
+  border: 1px solid var(--color-line);
+  box-shadow: 0 1px 2px rgb(46 34 64 / 0.04), 0 10px 28px -16px rgb(46 34 64 / 0.18);
+}
+
+/* same frame, for cards that bring their own gradient background */
+@utility sticker-flat {
+  border: 1px solid var(--color-line);
+  box-shadow: 0 1px 2px rgb(46 34 64 / 0.04), 0 10px 28px -16px rgb(46 34 64 / 0.18);
+}
+
+@utility sticker-sm {
+  border: 1px solid var(--color-line-strong);
+  box-shadow: 0 1px 2px rgb(46 34 64 / 0.06);
+}
+
+@utility outline-ink {
+  border: 1px solid var(--color-line-strong);
+}
+
+@utility press {
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.15s ease;
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+}
+
+@utility field {
+  width: 100%;
+  min-height: 2.875rem;
+  border: 1px solid var(--color-line-strong);
+  border-radius: 0.875rem;
+  background: var(--color-white);
+  padding: 0 0.9rem;
+  font-weight: 600;
+  &::placeholder {
+    color: #8a7f9a;
+  }
+  &:focus {
+    outline: none;
+    border-color: var(--color-grape);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-grape) 18%, transparent);
+  }
+}
+
+@utility sr-only-safe {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Chichi the mascot ---------- */
+@keyframes chichi-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+@keyframes chichi-wave {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(-14deg); }
+}
+@keyframes chichi-ring {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(12deg); }
+  40% { transform: rotate(-10deg); }
+  60% { transform: rotate(6deg); }
+}
+@keyframes chichi-seed {
+  0% { transform: translate(0, 0) rotate(0deg); opacity: 0; }
+  15% { opacity: 1; }
+  100% { transform: translate(10px, -26px) rotate(25deg); opacity: 0; }
+}
+@keyframes chichi-twinkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.55; transform: scale(0.9); }
+}
+@keyframes chichi-zzz {
+  0%, 100% { opacity: 0.4; transform: translateY(2px); }
+  50% { opacity: 1; transform: translateY(-2px); }
+}
+@keyframes pop-in {
+  from { transform: translateY(-14px) scale(0.96); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  25% { transform: rotate(-8deg); }
+  75% { transform: rotate(8deg); }
+}
+
+@keyframes island-in {
+  from { transform: scale(0.6); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes island-grow {
+  from { transform: scaleX(0.35) scaleY(0.4); opacity: 0.4; border-radius: 999px; }
+  to { transform: scale(1); opacity: 1; }
+}
+.island-in { animation: island-in 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.3) both; }
+.island-grow { transform-origin: top center; animation: island-grow 0.38s cubic-bezier(0.2, 0.9, 0.25, 1.15) both; }
+
+.mascot-bob { animation: chichi-bob 2.8s ease-in-out infinite; }
+.mascot-wave { transform-box: view-box; transform-origin: 86px 70px; animation: chichi-wave 1.1s ease-in-out infinite; }
+.mascot-ring { transform-box: view-box; transform-origin: 103px 36px; animation: chichi-ring 1.6s ease-in-out infinite; }
+.mascot-seed { transform-box: fill-box; animation: chichi-seed 4.5s ease-out infinite; }
+.mascot-seed-2 { animation-delay: 2.2s; }
+.mascot-twinkle { transform-box: fill-box; transform-origin: center; animation: chichi-twinkle 1.8s ease-in-out infinite; }
+.mascot-zzz { animation: chichi-zzz 2.4s ease-in-out infinite; }
+.pop-in { animation: pop-in 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.2) both; }
+.wiggle:hover, .wiggle:focus-visible { animation: wiggle 0.4s ease-in-out; }
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot-bob, .mascot-wave, .mascot-ring, .mascot-seed, .mascot-twinkle, .mascot-zzz, .pop-in, .wiggle:hover, .island-in, .island-grow {
+    animation: none !important;
+  }
+}
+
+/* ---------- Loading skeleton ---------- */
+@keyframes danchi-shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--color-peach-soft) 25%, var(--color-white) 50%, var(--color-peach-soft) 75%);
+  background-size: 200% 100%;
+  animation: danchi-shimmer 1.1s ease-in-out infinite;
+  border: 1px solid var(--color-line);
+}
+@media (prefers-reduced-motion: reduce) {
+  .skeleton { animation: none; }
+}
+
+/* ---------- Calm look ----------
+   Unlayered on purpose so it wins over the utility classes used everywhere:
+   thin hairlines instead of thick ink outlines, soft shadows instead of hard ones. */
+.border-ink {
+  border-color: var(--color-line-strong);
+}
+.border-2,
+.border-\[2\.5px\],
+.border-\[3px\] {
+  border-width: 1px;
+}
+[class*="shadow-[0_"] {
+  box-shadow: 0 1px 2px rgb(46 34 64 / 0.08) !important;
+}
+.font-display {
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Playful motion (games, emotes) ---------- */
+@keyframes emote-squish {
+  0% { transform: scale(0.55) rotate(-10deg); }
+  45% { transform: scale(1.16, 0.88) rotate(4deg); }
+  70% { transform: scale(0.94, 1.07) rotate(-2deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+.emote-bounce { animation: emote-squish 0.55s cubic-bezier(0.3, 1.6, 0.5, 1) both; transform-origin: 50% 85%; }
+
+@keyframes piece-drop {
+  0% { transform: translateY(var(--drop, -420%)); }
+  62% { transform: translateY(0); }
+  78% { transform: translateY(-14%) scale(1.05, 0.92); }
+  90% { transform: translateY(0) scale(0.97, 1.03); }
+  100% { transform: translateY(0) scale(1); }
+}
+.piece-drop { animation: piece-drop 0.55s cubic-bezier(0.55, 0, 0.75, 0.6) both; }
+
+@keyframes pop-place {
+  0% { transform: scale(0) rotate(-25deg); }
+  60% { transform: scale(1.25) rotate(8deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+.pop-place { animation: pop-place 0.38s cubic-bezier(0.3, 1.5, 0.5, 1) both; }
+
+@keyframes dice-tumble {
+  0% { transform: translateY(0) rotate(0) scale(1); }
+  25% { transform: translateY(-38%) rotate(160deg) scale(1.15); }
+  55% { transform: translateY(0) rotate(320deg) scale(0.92, 1.08); }
+  75% { transform: translateY(-10%) rotate(390deg); }
+  100% { transform: translateY(0) rotate(360deg) scale(1); }
+}
+.dice-tumble { animation: dice-tumble 0.8s cubic-bezier(0.25, 0.8, 0.35, 1); }
+
+@keyframes win-pulse {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.12); filter: brightness(1.12); }
+}
+.win-pulse { animation: win-pulse 0.9s ease-in-out infinite; }
+
+@keyframes token-hop {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-30%); }
+}
+.token-hop { animation: token-hop 0.5s ease-in-out 3; }
+
+.card3d { perspective: 700px; }
+.card3d-inner { position: relative; width: 100%; height: 100%; transition: transform 0.5s cubic-bezier(0.3, 1.35, 0.5, 1); transform-style: preserve-3d; }
+.card3d.flipped .card3d-inner { transform: rotateY(180deg); }
+.card-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.card-front { transform: rotateY(180deg); }
+
+@keyframes confetti-fall {
+  0% { transform: translate3d(0, -10vh, 0) rotate(0); opacity: 1; }
+  100% { transform: translate3d(var(--x, 0), 105vh, 0) rotate(var(--r, 540deg)); opacity: 0.9; }
+}
+.confetti-bit { position: fixed; top: 0; z-index: 120; pointer-events: none; animation: confetti-fall var(--d, 2.4s) cubic-bezier(0.25, 0.6, 0.4, 1) var(--delay, 0s) both; }
+
+@keyframes turn-ring { from { stroke-dashoffset: 0; } to { stroke-dashoffset: var(--len); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .emote-bounce, .piece-drop, .pop-place, .dice-tumble, .win-pulse, .token-hop, .confetti-bit { animation: none !important; }
+  .card3d-inner { transition: none; }
+}
+
+@keyframes eq-bounce {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+[style*="eq-bounce"] { transform-origin: bottom; }

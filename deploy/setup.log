@@ -1,0 +1,162 @@
+Script started on 2026-11-05 15:39:50+08:00 [COMMAND="bash deploy/update.sh" TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="234" LINES="15"]
+[1G[0K⠙[1G[0K⠹[1G[0K⠸[1G[0K⠼[1G[0K⠴[1G[0K⠦[1G[0K⠧[1G[0K⠇[1G[0K⠏[1G[0K⠋[1G[0K[1mnpm[22m [33mwarn[39m [94mdeprecated[39m @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.hirok.io
+[1G[0K⠋[1G[0K⠙[1G[0K[1mnpm[22m [33mwarn[39m [94mdeprecated[39m @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.hirok.io
+[1G[0K⠙[1G[0K⠹[1G[0K⠸[1G[0K⠼[1G[0K[1mnpm[22m [33mwarn[39m [94mdeprecated[39m node-domexception@1.0.0: Use your platform's native DOMException instead
+[1G[0K⠼[1G[0K⠴[1G[0K⠦[1G[0K⠧[1G[0K⠇[1G[0K⠏[1G[0K⠋[1G[0K⠙[1G[0K⠹[1G[0K⠸[1G[0K[1mnpm[22m [33mwarn[39m [94mdeprecated[39m eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.
+[1G[0K⠸[1G[0K⠼[1G[0K⠴[1G[0K⠦[1G[0K⠧[1G[0K⠇[1G[0K⠏[1G[0K⠋[1G[0K⠙[1G[0K⠹[1G[0K⠸[1G[0K⠼[1G[0K⠴[1G[0K⠦[1G[0K⠧[1G[0K⠇[1G[0K⠏[1G[0K⠋[1G[0K⠙[1G[0K⠹[1G[0K⠸[1G[0K⠼[1G[0K⠴[1G[0K⠦[1G[0K⠧[1G[0K⠇[1G[0K⠏[1G[0K⠋[1G[0K⠙[1G[0K
+added 461 packages in 7s
+[1G[0K⠙[1G[0K
+> danchi@0.18.0 db:migrate
+> drizzle-kit migrate
+
+[1G[0K[90mNo config path provided, using default 'drizzle.config.ts'[39m
+[90mReading config file '/home/user/danchi/drizzle.config.ts'[39m
+[90mUsing 'postgres' driver for database querying[39m
+[⣷] applying migrations...{
+  severity_local: [32m'NOTICE'[39m,
+  severity: [32m'NOTICE'[39m,
+  code: [32m'42P06'[39m,
+  message: [32m'schema "drizzle" already exists, skipping'[39m,
+  file: [32m'schemacmds.c'[39m,
+  line: [32m'132'[39m,
+  routine: [32m'CreateSchemaCommand'[39m
+}
+{
+  severity_local: [32m'NOTICE'[39m,
+  severity: [32m'NOTICE'[39m,
+  code: [32m'42P07'[39m,
+  message: [32m'relation "__drizzle_migrations" already exists, skipping'[39m,
+  file: [32m'parse_utilcmd.c'[39m,
+  line: [32m'208'[39m,
+  routine: [32m'transformCreateStmt'[39m
+}
+[2K[G[[32m✓[39m] migrations applied successfully![1G[0K⠙[1G[0K
+> danchi@0.18.0 build
+> next build
+
+[1G[0K[1m[38;2;173;127;168m▲ Next.js 16.4.4[39m[22m (Turbopack)
+- Environments: .env
+[33m[1m⚠[22m[39m Warning: Next.js ignored package-lock.json in /home/user because it would include your home directory (/home/user).
+ To use this directory, set `turbopack.root` in your Next.js config.
+
+[32m[1m✓[22m[39m Running next.config.ts took 34ms
+- Experiments (use with caution):
+  · optimizePackageImports
+  · serverActions
+  · staleTimes
+
+[37m[1m [22m[39m Creating an optimized production build ...
+[32m[1m✓[22m[39m Compiled successfully in 5.9s
+[37m[1m [22m[39m Running TypeScript ...
+[37m[1m [22m[39m Finished TypeScript in 12.5s ...
+[37m[1m [22m[39m Collecting page data using 11 workers ...
+[32m[1m✓[22m[39m Collecting page data using 11 workers in 2.0s
+[37m[1m [22m[39m Generating static pages using 11 workers (0/58) ...
+[37m[1m [22m[39m Generating static pages using 11 workers (14/58) 
+[37m[1m [22m[39m Generating static pages using 11 workers (28/58) 
+[37m[1m [22m[39m Generating static pages using 11 workers (43/58) 
+[32m[1m✓[22m[39m Generating static pages using 11 workers (58/58) in 407ms
+[37m[1m [22m[39m Finalizing page optimization ...
+[32m[1m✓[22m[39m Finalizing page optimization in 15ms
+
+[4mRoute (app)[24m
+┌ ƒ /
+├ ○ /_not-found
+├ ƒ /.well-known/assetlinks.json
+├ ƒ /api/ask
+├ ƒ /api/auth/[...all]
+├ ƒ /api/export
+├ ƒ /api/files
+├ ƒ /api/files/[id]
+├ ƒ /api/listen
+├ ƒ /api/listen/next
+├ ƒ /api/listen/now
+├ ƒ /api/live
+├ ƒ /api/lock/touch
+├ ƒ /api/love
+├ ƒ /api/love/bg
+├ ƒ /api/love/bg/[id]
+├ ƒ /api/love/photo/[id]
+├ ƒ /api/love/sticker
+├ ƒ /api/love/sticker/[id]
+├ ƒ /api/music/search
+├ ƒ /api/music/tracks
+├ ƒ /api/notifications
+├ ƒ /api/push
+├ ƒ /api/push/test
+├ ƒ /api/reminders/act
+├ ƒ /api/safe/act
+├ ƒ /api/sos/end
+├ ƒ /api/sos/live/[token]
+├ ƒ /api/sos/live/[token]/photo/[id]
+├ ƒ /api/sos/photo
+├ ƒ /api/sos/point
+├ ƒ /api/sos/start
+├ ƒ /api/spotify/callback
+├ ƒ /api/spotify/disconnect
+├ ƒ /api/spotify/login
+├ ƒ /ask
+├ ƒ /bills
+├ ƒ /calendar
+├ ƒ /check
+├ ƒ /cozy
+├ ƒ /cycle
+├ ƒ /guide
+├ ƒ /habits
+├ ○ /icon.svg
+├ ƒ /inbox
+├ ƒ /kitchen
+├ ƒ /kitchen/[id]
+├ ƒ /learn
+├ ƒ /learn/[id]
+├ ƒ /login
+├ ƒ /love
+├ ○ /manifest.webmanifest
+├ ƒ /money
+├ ƒ /music
+├ ƒ /notes
+├ ƒ /notes/[id]
+├ ƒ /papers
+├ ƒ /papers/[id]
+├ ƒ /play
+├ ƒ /projects
+├ ƒ /projects/[id]
+├ ƒ /reminders
+├ ƒ /safe
+├ ƒ /search
+├ ƒ /settings
+├ ƒ /shop
+├ ƒ /sos/[token]
+├ ƒ /study
+├ ƒ /study/course/[id]
+├ ƒ /study/deck/[id]
+├ ƒ /stuff
+├ ƒ /stuff/[id]
+├ ƒ /tasks
+├ ƒ /tasks/[id]
+└ ƒ /wishlist
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+[1G[0K⠙[1G[0K[32m[PM2] [39mApplying action reloadProcessId on app [danchi](ids: [ 3 ])
+[32m[PM2] [39mApplying action reloadProcessId on app [danchi-worker](ids: [ 4 ])
+[32m[PM2] [39m[danchi-worker](4) ✓
+[32m[PM2] [39m[danchi](3) ✓
+[90m┌────┬──────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐[39m
+[90m│[39m[1m[36m id [39m[22m[90m│[39m[1m[36m name             [39m[22m[90m│[39m[1m[36m namespace   [39m[22m[90m│[39m[1m[36m version [39m[22m[90m│[39m[1m[36m mode    [39m[22m[90m│[39m[1m[36m pid      [39m[22m[90m│[39m[1m[36m uptime [39m[22m[90m│[39m[1m[36m ↺    [39m[22m[90m│[39m[1m[36m status    [39m[22m[90m│[39m[1m[36m cpu      [39m[22m[90m│[39m[1m[36m mem      [39m[22m[90m│[39m[1m[36m user     [39m[22m[90m│[39m[1m[36m watching [39m[22m[90m│[39m
+[90m├────┼──────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤[39m
+[90m│[39m[1m[36m [1m[36m1[39m[36m[22m[1m  [39m[22m[90m│[39m arena-backend    [90m│[39m default     [90m│[39m 1.0.0   [90m│[39m [7m[1mfork[22m[27m    [90m│[39m 1514     [90m│[39m 35h    [90m│[39m 0    [90m│[39m [32m[1monline[22m[39m    [90m│[39m 0%       [90m│[39m 79.5mb   [90m│[39m [1muser[22m     [90m│[39m [90mdisabled[39m [90m│[39m
+[90m│[39m[1m[36m [1m[36m3[39m[36m[22m[1m  [39m[22m[90m│[39m danchi           [90m│[39m default     [90m│[39m 16.4.4  [90m│[39m [7m[1mfork[22m[27m    [90m│[39m 1935393  [90m│[39m 0s     [90m│[39m 17   [90m│[39m [32m[1monline[22m[39m    [90m│[39m 0%       [90m│[39m 20.2mb   [90m│[39m [1muser[22m     [90m│[39m [90mdisabled[39m [90m│[39m
+[90m│[39m[1m[36m [1m[36m4[39m[36m[22m[1m  [39m[22m[90m│[39m danchi-worker    [90m│[39m default     [90m│[39m 4.23.15 [90m│[39m [7m[1mfork[22m[27m    [90m│[39m 1935335  [90m│[39m 1s     [90m│[39m 14   [90m│[39m [32m[1monline[22m[39m    [90m│[39m 0%       [90m│[39m 60.4mb   [90m│[39m [1muser[22m     [90m│[39m [90mdisabled[39m [90m│[39m
+[90m│[39m[1m[36m [1m[36m2[39m[36m[22m[1m  [39m[22m[90m│[39m tanahraya        [90m│[39m default     [90m│[39m N/A     [90m│[39m [7m[1mfork[22m[27m    [90m│[39m 1519     [90m│[39m 35h    [90m│[39m 0    [90m│[39m [32m[1monline[22m[39m    [90m│[39m 0%       [90m│[39m 73.5mb   [90m│[39m [1muser[22m     [90m│[39m [90mdisabled[39m [90m│[39m
+[90m│[39m[1m[36m [1m[36m0[39m[36m[22m[1m  [39m[22m[90m│[39m thoughtlog       [90m│[39m default     [90m│[39m 1.0.0   [90m│[39m [7m[1mfork[22m[27m    [90m│[39m 1508     [90m│[39m 35h    [90m│[39m 0    [90m│[39m [32m[1monline[22m[39m    [90m│[39m 0%       [90m│[39m 85.7mb   [90m│[39m [1muser[22m     [90m│[39m [90mdisabled[39m [90m│[39m
+[90m└────┴──────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘[39m
+[32m[PM2] [39mSaving current process list...
+[32m[PM2] [39mSuccessfully saved in /home/user/.pm2/dump.pm2
+🍑 Danchi updated. pm2 logs danchi to watch.
+
+Script done on 2026-11-05 15:40:22+08:00 [COMMAND_EXIT_CODE="0"]

@@ -1,0 +1,127 @@
+==whoami
+user
+User
+==os
+Ubuntu 24.04.4 LTS
+x86_64
+==tools
+v22.23.2
+10.9.8
+psql (PostgreSQL) 18.4 (Ubuntu 18.4-1.pgdg24.04+1)
+7.0.1
+cloudflared version 2026.5.1 (built 2026-05-25-10:24 UTC)
+git version 2.43.0
+==pm2
+┌────┬──────────────────┬─────────────┬─────────┬─────────┬──────────┬────────┬──────┬───────────┬──────────┬──────────┬──────────┬──────────┐
+│ id │ name             │ namespace   │ version │ mode    │ pid      │ uptime │ ↺    │ status    │ cpu      │ mem      │ user     │ watching │
+├────┼──────────────────┼─────────────┼─────────┼─────────┼──────────┼────────┼──────┼───────────┼──────────┼──────────┼──────────┼──────────┤
+│ 1  │ arena-backend    │ default     │ 1.0.0   │ fork    │ 1539     │ 10D    │ 0    │ online    │ 0%       │ 78.8mb   │ user     │ disabled │
+│ 2  │ tanahraya        │ default     │ N/A     │ fork    │ 1545     │ 10D    │ 0    │ online    │ 0%       │ 73.8mb   │ user     │ disabled │
+│ 0  │ thoughtlog       │ default     │ 1.0.0   │ fork    │ 1533     │ 10D    │ 0    │ online    │ 0%       │ 90.7mb   │ user     │ disabled │
+└────┴──────────────────┴─────────────┴─────────┴─────────┴──────────┴────────┴──────┴───────────┴──────────┴──────────┴──────────┴──────────┘
+==ports
+Local Peer
+100.77.41.4:40051 
+127.0.0.1:38471 
+127.0.0.53%lo:53 
+0.0.0.0:3001 
+0.0.0.0:3000 
+127.0.0.54:53 
+0.0.0.0:9993 
+127.0.0.1:8125 
+0.0.0.0:22 
+0.0.0.0:80 
+0.0.0.0:8000 
+127.0.0.1:8787 
+127.0.0.1:33655 
+127.0.0.1:11434 users:(("ollama",pid=1715,fd=4))
+0.0.0.0:5432 
+127.0.0.1:3101 
+127.0.0.1:19999 
+127.0.0.1:20241 users:(("cloudflared",pid=1708,fd=10))
+*:3389 
+*:3100 users:(("next-server
+*:4002 users:(("node
+[fd7a:115c:a1e0::9237:2905]:49507 
+[::]:3001 
+[::]:3000 
+*:3005 users:(("node
+[::1]:3350 
+*:9993 
+[::]:22 
+[::]:80 
+[::]:8000 
+[::]:5432 
+==cloudflared
+/etc/cloudflared:
+total 48
+drwxr-xr-x   2 root root  4096 Jul 18 12:56 .
+drwxr-xr-x 144 root root 12288 Oct 28 06:27 ..
+-r--------   1 root root   175 May 26 15:04 30fd8748-a6d0-4550-8f4c-53a1b4127d16.json
+-r--------   1 root root   175 May 26 15:04 60fe2ce1-aee2-4e19-a1a9-ca1c210e4402.json
+-rw-------   1 root root   282 May 26 15:04 cert.pem
+-rw-r--r--   1 root root   658 Jul 18 12:56 config.yml
+-rw-r--r--   1 root root   565 Jun 25 19:07 config.yml.bak
+-rw-r--r--   1 root root 12288 Jun 27 05:51 .config.yml.swp
+
+/home/user/.cloudflared:
+total 32
+drwx------  2 user user 4096 Aug  1 13:09 .
+drwxr-x--x 42 user user 4096 Oct 23 18:30 ..
+-r--------  1 user user  175 Jun  6 03:28 07e70c29-9f2e-43cd-881b-2e7d88298063.json
+-r--------  1 user user  175 May 26 15:00 30fd8748-a6d0-4550-8f4c-53a1b4127d16.json
+-r--------  1 user user  175 May 26 14:39 60fe2ce1-aee2-4e19-a1a9-ca1c210e4402.json
+-rw-------  1 user user  282 May 26 14:36 cert.pem
+-rw-rw-r--  1 user user  595 Aug  1 13:09 config.yml
+-rw-rw-r--  1 user user  522 Aug  1 13:03 config.yml.bak
+tunnel: 07e70c29-9f2e-43cd-881b-2e7d88298063
+credentials-file: /home/user/.cloudflared/07e70c29-9f2e-43cd-881b-2e7d88298063.json
+protocol: http2
+ingress:
+  - hostname: campusbay.store
+    service: http://localhost:80
+  - hostname: www.campusbay.store
+    service: http://localhost:80
+  - hostname: papermind.rafiarsya.com
+    service: http://localhost:3001
+  - hostname: snip.rafiarsya.com
+    service: http://localhost:3002
+  - hostname: blog.rafiarsya.com
+    service: http://localhost:3005
+  - hostname: tanahraya.rafiarsya.com
+    service: http://localhost:3100
+  - service: http_status:404
+tunnel: 30fd8748-a6d0-4550-8f4c-53a1b4127d16
+credentials-file: /home/user/.cloudflared/30fd8748-a6d0-4550-8f4c-53a1b4127d16.json
+protocol: http2
+ingress:
+  - hostname: campusbay.store
+    service: http://localhost:3000
+  - hostname: www.campusbay.store
+    service: http://localhost:3000
+  - hostname: um-connects.com
+    service: http://localhost:3000
+  - hostname: snip.rafiarsya.com
+    service: http://localhost:3002
+  - hostname: blog.rafiarsya.com
+    service: http://localhost:3005
+  - hostname: arena.rafiarsya.com
+    service: http://localhost:80
+  - hostname: papermind.rafiarsya.com
+    service: http://localhost:8000
+  - service: http_status:404
+active
+  cloudflared.service                                   loaded active running Cloudflare Tunnel
+  pm2-user.service                                      loaded active running PM2 process manager
+  postgresql.service                                    loaded active exited  PostgreSQL RDBMS
+  postgresql@18-main.service                            loaded active running PostgreSQL Cluster 18-main
+==disk
+/dev/nvme0n1p2  468G   71G  373G  16% /
+               total        used        free      shared  buff/cache   available
+Mem:            15Gi       2.3Gi       6.7Gi       117Mi       6.8Gi        13Gi
+==sudo
+sudo: a password is required
+SUDO_NEEDS_PASSWORD
+==danchi
+ls: cannot access '/home/user/danchi': No such file or directory
+exit code 0 
