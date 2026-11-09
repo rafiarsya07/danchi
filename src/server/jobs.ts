@@ -285,9 +285,11 @@ export async function runPinned(db: Db, now = new Date()) {
   for (const s of owners) {
     if (!s.pinnedStatus) {
       if (s.lastPinnedText) {
-        // Switched off: clear it from phones once.
+        // Switched off. The phone removes it itself when the switch is flipped
+        // (Settings). We no longer send an invisible "clear" push: browsers
+        // treat pushes that show nothing as abuse and can drop the subscription,
+        // which made notifications turn themselves off.
         await db.update(settings).set({ lastPinnedText: null }).where(eq(settings.ownerId, s.ownerId));
-        await notify(db, { ownerId: s.ownerId, kind: "info", audience: "owner", title: "", inbox: false, pushExtra: { tag: "danchi-island", silent: true }, clear: true });
       }
       continue;
     }

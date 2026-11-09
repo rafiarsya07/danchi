@@ -13,10 +13,26 @@ self.addEventListener("fetch", (e) => {
   e.respondWith(fetch(e.request).catch(() => caches.match("/offline.html").then((r) => r || Response.error())));
 });
 
-function tellOpenTabs() {
+/* Danchi sw v2: self-healing push subscription, in-app chime, louder reminders. */
+
+function tellOpenTabs(extra) {
   return self.clients
     .matchAll({ type: "window", includeUncontrolled: true })
-    .then((list) => list.forEach((c) => c.postMessage({ type: "danchi-push" })));
+    .then((list) => list.forEach((c) => c.postMessage(Object.assign({ type: "danchi-push" }, extra || {}))));
+}
+
+/** Is Danchi open and on screen right now? */
+function appOnScreen() {
+  return self.clients
+    .matchAll({ type: "window", includeUncontrolled: true })
+    .then((list) => list.some((c) => c.visibilityState === "visible" && c.focused));
+}
+
+function vibrateFor(d) {
+  if (d.silent) return undefined;
+  if (d.kind === "safety") return [300, 120, 300, 120, 500];
+  if (d.kind === "reminder") return [250, 120, 250, 120, 250];
+  return [120, 60, 120];
 }
 
 self.addEventListener("push", (e) => {
@@ -26,25 +42,68 @@ self.addEventListener("push", (e) => {
   } catch {
     d = { title: "Danchi", body: e.data ? e.data.text() : "" };
   }
-  if (d.clearTag) {
-    e.waitUntil(
-      self.registration.getNotifications({ tag: d.clearTag }).then((list) => list.forEach((n) => n.close())),
-    );
-    return;
-  }
-  const show = self.registration.showNotification(d.title || "Danchi", {
-    body: d.body || "",
-    icon: "/icons/icon-192.png",
-    badge: "/icons/badge-96.png",
-    tag: d.tag || undefined,
-    renotify: !d.silent && !!d.tag,
-    silent: !!d.silent,
-    requireInteraction: !!d.sticky,
-    actions: Array.isArray(d.actions) ? d.actions.slice(0, 2) : [],
-    data: { url: d.url || "/", reminderId: d.reminderId || null, checkinId: d.checkinId || null },
-    vibrate: d.silent ? undefined : d.kind === "safety" ? [200, 100, 200, 100, 400] : [80, 40, 80],
-  });
-  e.waitUntil(Promise.all([show, d.silent ? null : tellOpenTabs()]));
+  e.waitUntil(
+    (async () => {
+      // Old servers sent "clear" pushes that showed nothing; browsers punish
+      // that (iPhone even drops the subscription), so we only close quietly
+      // and always show something.
+      if (d.clearTag) {
+        const list = await self.registration.getNotifications({ tag: d.clearTag });
+        list.forEach((n) => n.close());
+        if (!d.title) return;
+      }
+      // When the app is open on screen, the page plays Chichi's chime, so the
+      // phone's own sound stays quiet (no double ding).
+      const onScreen = !d.silent && (await appOnScreen().catch(() => false));
+      const silent = !!d.silent || onScreen;
+      await self.registration.showNotification(d.title || "Danchi", {
+        body: d.body || "",
+        icon: "/icons/icon-192.png",
+        badge: "/icons/badge-96.png",
+        tag: d.tag || undefined,
+        renotify: !silent && !!d.tag,
+        silent,
+        requireInteraction: !!d.sticky,
+        actions: Array.isArray(d.actions) ? d.actions.slice(0, 2) : [],
+        data: { url: d.url || "/", reminderId: d.reminderId || null, checkinId: d.checkinId || null },
+        vibrate: silent ? undefined : vibrateFor(d),
+        timestamp: Date.now(),
+      });
+      if (!d.silent) await tellOpenTabs({ chime: onScreen, kind: d.kind || null });
+    })(),
+  );
+});
+
+/* The browser renewed or dropped our subscription (updates do this). Make a
+   new one right away and tell the server, so pings never stop. */
+function b64ToBytes(base64) {
+  const pad = "=".repeat((4 - (base64.length % 4)) % 4);
+  const raw = atob((base64 + pad).replace(/-/g, "+").replace(/_/g, "/"));
+  return Uint8Array.from(raw, (c) => c.charCodeAt(0));
+}
+
+self.addEventListener("pushsubscriptionchange", (e) => {
+  e.waitUntil(
+    (async () => {
+      let sub = e.newSubscription || null;
+      if (!sub) {
+        let key = e.oldSubscription && e.oldSubscription.options ? e.oldSubscription.options.applicationServerKey : null;
+        if (!key) {
+          const r = await fetch("/api/push", { credentials: "include" });
+          const info = r.ok ? await r.json() : {};
+          if (!info.publicKey) return;
+          key = b64ToBytes(info.publicKey);
+        }
+        sub = await self.registration.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: key });
+      }
+      await fetch("/api/push", {
+        method: "POST",
+        credentials: "include",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify(Object.assign(sub.toJSON(), { oldEndpoint: e.oldSubscription ? e.oldSubscription.endpoint : undefined })),
+      });
+    })().catch(() => {}),
+  );
 });
 
 function openApp(path) {

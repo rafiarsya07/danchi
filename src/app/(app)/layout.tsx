@@ -1,5 +1,6 @@
 import { Shell } from "@/components/shell";
 import { LockScreen } from "@/components/lock-screen";
+import { PushKeeper } from "@/components/push-keeper";
 import { db } from "@/db";
 import { getSosInfo } from "@/server/sos";
 import { getIslandState, getUnreadCount } from "@/lib/data";
@@ -38,6 +39,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       hidden={[...hidden]}
       lockMinutes={lock?.lockMinutes ?? 0}
     >
+      <PushKeeper publicKey={process.env.VAPID_PUBLIC_KEY || null} />
       {children}
     </Shell>
   );
